@@ -1,9 +1,12 @@
 import requests as rq
 import os
-
+import message_handler
 
 def send(recipientId, message):
     page_access_token = os.environ.get("PAGE_ACCESS_TOKEN")
+    message = message_handler.get_most_similar_res_msg(message)
+    if(message == None):
+        message = "GG"
     fbData = {
       "recipient": {
         "id": recipientId

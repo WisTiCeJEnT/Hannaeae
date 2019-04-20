@@ -3,6 +3,7 @@ from linebot import (LineBotApi, WebhookHandler)
 from linebot.exceptions import (InvalidSignatureError)
 from linebot.models import (MessageEvent, TextMessage, TextSendMessage)
 import json
+import message_handler
 
 last_sender = ""
 
@@ -34,24 +35,10 @@ def webhook(flask_request):
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    res = message_handler.get_most_similar_res_msg(event.message.text)
+    if(res == None):
+        res = "GG"
+
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text))
-"""
-    if web_method == 'POST':
-        message = data['entry'][0]['messaging'][0]
-        sender = message['sender']['id']
-        global last_sender
-        last_sender = sender
-        print(data)
-        
-        return json.dumps(data, sort_keys=True, indent=4, separators=(',', ': '))
-
-    elif web_method == "GET":
-        token = data["hub.verify_token"]
-        chal = data["hub.challenge"]
-        print(token,chal)
-        return chal
-    else:
-        return "POST me some JSON"
-"""
+        TextSendMessage(text=res))
