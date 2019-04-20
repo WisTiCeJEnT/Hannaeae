@@ -23,7 +23,7 @@ def getUserData(uid):
     return db.child("/user/").child(uid).get().val()
 
 def addUserData(uid, user_data):
-    db.child("/user/").child(uid).set(data)
+    db.child("/user/").child(uid).set(user_data)
 
 #init
 #gen serviceAccoutFile
