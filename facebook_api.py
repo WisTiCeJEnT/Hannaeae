@@ -1,12 +1,11 @@
 import requests as rq
 import os
 import message_handler
+import port_to_handler
 
 def send(recipientId, message):
     page_access_token = os.environ.get("PAGE_ACCESS_TOKEN")
-    message = message_handler.get_most_similar_res_msg(message)
-    if(message == None):
-        message = "GG"
+    message = port_to_handler.get_reply(message)
     fbData = {
       "recipient": {
         "id": recipientId
