@@ -4,7 +4,6 @@ import line_api
 import facebook_api
 import json
 import firebase_api
-from scipy import spatial
 from message_handler import message_tokenize
 
 app = Flask(__name__)
