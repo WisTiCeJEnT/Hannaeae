@@ -39,6 +39,13 @@ def facebookWebhook():
         return chal
     else:
         return "POST me some JSON"
+@app.route('/add', methods=['POST'])
+def add():
+    req = eval(request.data)
+    req_msg = req['req_msg']
+    req_msg_tokenize = message_tokenize(req['req_msg'])
+    res_msg = res_msg
+    return 'Done'
 
 def message_tokenize(message):
     return deepcut.tokenize(message)
