@@ -9,7 +9,7 @@ def random_out():
     return OUT_OF_JOKE[random.randint(0, len(OUT_OF_JOKE)-1)]
 
 def get_reply(msg):
-    msg = message_handler.get_most_similar_res_msg(msg)
+    msg = message_handler.get_answer(msg)
     if (msg == None):
         msg = random_out()
     return msg
