@@ -6,9 +6,18 @@ def addNewMsg(data):
     req_msg = data["req_msg"]
     db.child("/msg/").child(req_msg).set(data)
 
+def addNewMsgQA(data):
+    req_msg = data["req_msg"]
+    db.child('/msgQA/').child(req_msg).set(data)
+
 def getAllMsg():
     return db.child("/msg/").get().val()
 
+def getAllMsgQA():
+    return db.child("/msgQA/").get().val()
+
+def getMsgQA(joke_id):
+    return db.child("/msgQA").child(joke_id).get().val()
 #init
 #gen serviceAccoutFile
 f = open("./saf.json", 'w')
