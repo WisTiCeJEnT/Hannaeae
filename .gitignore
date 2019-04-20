@@ -1,3 +1,5 @@
 env
 *.py[co]
 *.DS_*
+hannaeae-db-firebase-adminsdk*.json
+saf.json
