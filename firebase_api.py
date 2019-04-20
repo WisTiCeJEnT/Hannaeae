@@ -4,11 +4,11 @@ import os
 
 def addNewMsg(data):
     req_msg = data["req_msg"]
-    db.child("/msg/").child(req_msg).set(data)
+    db.child("/msg/").push(data)
 
 def addNewMsgQA(data):
     req_msg = data["req_msg"]
-    db.child('/msgQA/').child(req_msg).set(data)
+    db.child('/msgQA/').push(data)
 
 def getAllMsg():
     return db.child("/msg/").get().val()
@@ -18,6 +18,13 @@ def getAllMsgQA():
 
 def getMsgQA(joke_id):
     return db.child("/msgQA").child(joke_id).get().val()
+
+def getUserData(uid):
+    return db.child("/user/").child(uid).get().val()
+
+def addUserData(uid, user_data):
+    db.child("/user/").child(uid).set(data)
+
 #init
 #gen serviceAccoutFile
 f = open("./saf.json", 'w')

@@ -5,7 +5,7 @@ import port_to_handler
 
 def send(recipientId, message):
     page_access_token = os.environ.get("PAGE_ACCESS_TOKEN")
-    message = port_to_handler.get_reply(message)
+    message = port_to_handler.get_reply(message, "fb_"+str(recipientId))
     fbData = {
       "recipient": {
         "id": recipientId
