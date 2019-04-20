@@ -3,7 +3,7 @@ from flask_cors import CORS
 import line_api
 import facebook_api
 import json
-
+import firebase_api
 from scipy import spatial
 import deepcut
 app = Flask(__name__)
@@ -12,6 +12,21 @@ CORS(app)
 @app.route('/')
 def root():
     return "Working"
+
+@app.route('/add', methods=['POST'])
+def add():
+    req = eval(request.data)
+    req_msg = req['req_msg']
+    req_msg_tokenize = message_tokenize(req['req_msg'])
+    res_msg = req['res_msg']
+    payload = {
+        'req_msg': req_msg,
+        'req_msg_tokenize': req_msg_tokenize,
+        'res_msg': res_msg,
+    }
+    payload['category'] = 'general' if 'catagory' not in req else req['category']
+    firebase_api.addNewMsg(payload)
+    return 'Done'
 
 @app.route('/lineWebhook', methods = ['GET', 'POST'])
 def lineWebhook():
@@ -39,13 +54,8 @@ def facebookWebhook():
         return chal
     else:
         return "POST me some JSON"
-@app.route('/add', methods=['POST'])
-def add():
-    req = eval(request.data)
-    req_msg = req['req_msg']
-    req_msg_tokenize = message_tokenize(req['req_msg'])
-    res_msg = res_msg
-    return 'Done'
+
+
 
 def message_tokenize(message):
     return deepcut.tokenize(message)
