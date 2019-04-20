@@ -32,7 +32,9 @@ def message_comparison(msg1, msg2):
 def intersection(msg1, msg2):
     return list(set(msg1+msg2))
 
+
 def get_answer(message, joke_id, mode=1, state=0):
+
     if mode == 1:
         return get_most_similar_res_msg(message)
     if mode == 2:
