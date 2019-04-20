@@ -13,8 +13,8 @@ except:
     print("Line: Get os env var error")
 
 def webhook(flask_request):
-    print(os.environ['LINE_CHANNEL_ACCESS_TOKEN'])
-    print(os.environ['LINE_YOUR_CHANNEL_SECRET'])
+    print("LINE_CHANNEL_ACCESS_TOKEN", os.environ['LINE_CHANNEL_ACCESS_TOKEN'])
+    print("LINE_YOUR_CHANNEL_SECRET", os.environ['LINE_YOUR_CHANNEL_SECRET'])
     # get X-Line-Signature header value
     signature = flask_request.headers['X-Line-Signature']
 
