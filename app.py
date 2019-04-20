@@ -17,15 +17,23 @@ def root():
 def add():
     req = eval(request.data)
     req_msg = req['req_msg']
-    req_msg_tokenize = message_tokenize(req['req_msg'])
     res_msg = req['res_msg']
+    req_msg_tokenize = message_tokenize(req['req_msg'])
+    res_msg_tokenize = message_tokenize(req['res_msg'])
     payload = {
         'req_msg': req_msg,
         'req_msg_tokenize': req_msg_tokenize,
         'res_msg': res_msg,
+        'res_msg_tokenize': res_msg_tokenize
     }
     payload['category'] = 'general' if 'catagory' not in req else req['category']
-    firebase_api.addNewMsg(payload)
+    payload['mode'] = 1 if 'mode' not in req else req['mode']
+
+    if payload['mode'] == 1:
+        firebase_api.addNewMsg(payload)
+    if payload['mode'] == 2:
+        payload['description'] = '' if 'description' not in req else req['description']
+        firebase_api.addNewMsgQA(payload)
     return 'Done'
 
 @app.route('/lineWebhook', methods = ['GET', 'POST'])
