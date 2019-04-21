@@ -103,8 +103,8 @@ def check_spliter(word):
     return None, None
 
 
-while 0==0:
-    word = input("word: ")
-    print(puan_kum(word))
+# while 0==0:
+#     word = input("word: ")
+#     print(puan_kum(word))
 
 
