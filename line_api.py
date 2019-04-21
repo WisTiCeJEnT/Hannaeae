@@ -37,7 +37,7 @@ def webhook(flask_request):
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     print(event, type(event), type(event.message), type(event.source), event.source)
-    res = port_to_handler.get_reply(event.message.text, "l_"+str(event.source.userId))
+    res = port_to_handler.get_reply(event.message.text, "l_"+str(event.source.user_id))
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=res))
