@@ -54,6 +54,7 @@ def get_reply(msg, userid):
             user_data["mode"],
             user_data["state"])
             user_data["joke_id"] = ""
+            user_data["mode"] = 1
         else:
             msg = message_handler.get_answer(msg,
             user_data["joke_id"],
