@@ -38,6 +38,30 @@ def add():
         firebase_api.addNewMsgQA(payload)
     return 'Done'
 
+@app.route('/addForm', methods=['POST'])
+def addForm():
+    #req = eval(request.data)
+    #print(req)
+    req_msg = request.form.get('req_msg')
+    res_msg = request.form.get('res_msg')
+    req_msg_tokenize = message_tokenize(request.form.get('req_msg'))
+    res_msg_tokenize = message_tokenize(request.form.get('res_msg'))
+    payload = {
+        'req_msg': req_msg,
+        'req_msg_tokenize': req_msg_tokenize,
+        'res_msg': res_msg,
+        'res_msg_tokenize': res_msg_tokenize
+    }
+    payload['category'] = 'general'
+    payload['mode'] = request.form.get('mode')
+
+    if payload['mode'] == 1:
+        firebase_api.addNewMsg(payload)
+    if payload['mode'] == 2:
+        payload['description'] = request.form.get('description')
+        firebase_api.addNewMsgQA(payload)
+    return 'Done'
+
 @app.route('/lineWebhook', methods = ['GET', 'POST'])
 def lineWebhook():
     return line_api.webhook(request)
