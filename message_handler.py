@@ -1,6 +1,7 @@
 import deepcut
 import firebase_api
 import random
+from kum_puan import puan_kum
 from scipy import spatial
 
 response_correct_message = ['ฮั่นแน่ เก่งจังนะไอ่สัส']
@@ -37,8 +38,10 @@ def get_answer(message, joke_id, mode=1, state=0):
 
     if mode == 1:
         return get_most_similar_res_msg(message)
-    if mode == 2:
+    elif mode == 2:
         return get_result_from_qa(message, joke_id)
+    elif mode == 3:
+        return puan_kum(message)
 
 def get_result_from_qa(msg,joke_id):
     # response = dict(firebase_api.getAllMsg())
