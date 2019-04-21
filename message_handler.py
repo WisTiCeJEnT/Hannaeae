@@ -4,8 +4,8 @@ import random
 from kum_puan import puan_kum
 from scipy import spatial
 
-response_correct_message = ['ฮั่นแน่ เก่งจังนะไอ่สัส']
-response_incorrect_message = ['เจ้ายังอ่อนหัดยิ่งนัก']
+response_correct_message = ['ฮั่นแน่ เก่งจังนะไอ่สัส', 'เอาหว่ะ', 'กูยอมมึงเลยย', 'รู้ได้ไง', 'แอบเปิดโพยสินะ']
+response_incorrect_message = ['เจ้ายังอ่อนหัดยิ่งนัก', 'กากก', 'มั่วโว้ยยย', 'อะไรของมึงเนี่ยย', 'ไปหัดมาใหม่']
 
 def get_prefix_answer(is_correct_answer):
     if is_correct_answer:
