@@ -3,15 +3,15 @@ import firebase_api
 import random
 from scipy import spatial
 
-response_correct_message = ['', '']
-response_incorrect_message = ['', '']
+response_correct_message = ['ฮั่นแน่ เก่งจังนะไอ่สัส']
+response_incorrect_message = ['เจ้ายังอ่อนหัดยิ่งนัก']
 
 def get_prefix_answer(is_correct_answer):
     if is_correct_answer:
         index = random.randint(0,len(response_correct_message) - 1)
-        return response_correct_message[index]
+        return response_correct_message[index] + ' คำตอบคือ'
     index = random.randint(0,len(response_incorrect_message) - 1)
-    return response_incorrect_message[index]
+    return response_incorrect_message[index] + ' เฉลยคือ'
 
 def message_tokenize(message):
     return deepcut.tokenize(message)
@@ -44,13 +44,15 @@ def get_result_from_qa(msg,joke_id):
     # response = dict(firebase_api.getAllMsg())
     joke = dict(firebase_api.getMsgQA(joke_id))
     req_msg_tokenize = message_tokenize(msg)
+    if 'res_msg_tokenize' not in joke:
+        return None
     tokenize = joke['res_msg_tokenize']
     score = message_comparison(tokenize, req_msg_tokenize)
     is_correct_answer = False
     if score > 0.5:
         is_correct_answer = True
     response_prefix_message = get_prefix_answer(is_correct_answer)
-    description_answer = '' if 'description' in joke else joke['description']
+    description_answer = '' if 'description' not in joke else joke['description']
     response_message = "{0} {1}".format(response_prefix_message, description_answer)
     return response_message
 
@@ -69,7 +71,7 @@ def get_most_similar_res_msg(msg):
             previous_score = sum_score
             sum_score+=score
             answer.append((previous_score, sum_score, response[i]['res_msg']))
-        ran_val = random.uniform(0, sum_score)
+    ran_val = random.uniform(0, sum_score)
     for i in answer:
         if ran_val < i[1] and ran_val > i[0]:
             return i[2]
