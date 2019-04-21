@@ -9,7 +9,7 @@ list_of_word = []
 def puan_kum(word):
     full_word = ''
     middle = ''
-    list_of_word = deepcut.tokenize(word, custom_dict=['สวี', 'สวัส', 'ดี', 'อะ', 'ไร', 'ทำ', 'เรอ', 'เบลอ', 'ละ', 'ฟัน'])
+    list_of_word = deepcut.tokenize(word, custom_dict=['สวี', 'สวัส', 'ดี', 'อะ', 'ไร', 'ทำ', 'เรอ', 'เบลอ', 'ละ', 'ฟัน', 'นะ'])
     first_word = list_of_word[0]
     # print(first_word)
     last_word = list_of_word[-1]
@@ -62,6 +62,8 @@ def puan_kum(word):
 
 
 def find_alpha(word):
+    if len(word) <= 1:
+        return '-', 0, 1
     first_char = word[0]
     if is_alpha(first_char):
         if word[0:2] == "อย":
@@ -83,7 +85,7 @@ def find_alpha(word):
                         return word[1:3], 1, 3
             return word[1:2], 1, 2
 
-    return '-', None
+    return '-', None, None
 
 
 def is_alpha(c):
@@ -92,6 +94,8 @@ def is_alpha(c):
 
 def check_spliter(word):
     if len(word) <= 4:
+        return None, None
+    if 'ี้ย' in word or 'ี่ย' in word or 'ี๊ย' in word or 'ี๋ย' in word:
         return None, None
     for i in range(0, len(word)):
         if word[i] in list_vowel and (i+1 < len(word)-1):
@@ -106,8 +110,8 @@ def check_spliter(word):
     return None, None
 
 
-# while 0==0:
-#     word = input("word: ")
-#     print(puan_kum(word))
+while 0==0:
+    word = input("word: ")
+    print(puan_kum(word))
 
 
