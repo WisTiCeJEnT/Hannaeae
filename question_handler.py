@@ -6,7 +6,7 @@ def get_random_question():
   keys = question_set.keys()
   length = len(keys)
 
-  index = random.randint(0,l-1)
+  index = random.randint(0,length-1)
   return {
     'question': question_set[keys[index]]['req_msg'],
     'joke_id': keys[index]
