@@ -4,6 +4,7 @@ import line_api
 import facebook_api
 import json
 import firebase_api
+import port_to_handler
 from message_handler import message_tokenize
 
 app = Flask(__name__)
@@ -39,6 +40,12 @@ def add():
 @app.route('/lineWebhook', methods = ['GET', 'POST'])
 def lineWebhook():
     return line_api.webhook(request)
+
+"""
+@app.route('/chat', methods = ['GET', 'POST'])
+def chatApi():
+    return port_to_handler()
+"""
 
 @app.route('/facebookWebhook', methods = ['GET', 'POST'])
 def facebookWebhook():
