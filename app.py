@@ -54,7 +54,7 @@ def addForm():
     }
     payload['category'] = 'general'
     payload['mode'] = request.form.get('mode')
-
+    print(payload)
     if payload['mode'] == 1:
         firebase_api.addNewMsg(payload)
     if payload['mode'] == 2:
