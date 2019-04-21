@@ -17,6 +17,7 @@ def root():
 @app.route('/add', methods=['POST'])
 def add():
     req = eval(request.data)
+    print(req)
     req_msg = req['req_msg']
     res_msg = req['res_msg']
     req_msg_tokenize = message_tokenize(req['req_msg'])
