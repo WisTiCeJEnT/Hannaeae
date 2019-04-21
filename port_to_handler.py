@@ -31,6 +31,8 @@ def get_reply(msg, userid):
         q_data = question_handler.get_random_question()
         user_data["joke_id"] = q_data["joke_id"]
         msg = q_data["question"]
+    elif("ช่วยด้วย" in msg):
+         msg = "เลื่อนไปดูข้างบนดิสัส"
     else:
         if(user_data["mode"] == 2 and user_data["joke_id"] != ""):
             msg = message_handler.get_answer(msg,
