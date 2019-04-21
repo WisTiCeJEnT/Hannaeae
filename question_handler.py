@@ -3,7 +3,7 @@ import random
 
 def get_random_question():
   question_set = dict(getAllMsgQA())
-  keys = question_set.keys()
+  keys = list(question_set.keys())
   length = len(keys)
 
   index = random.randint(0,length-1)
