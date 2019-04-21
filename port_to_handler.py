@@ -17,10 +17,23 @@ def get_reply(msg, userid):
             "state": 0,
             "joke_id": ""
         }
-    msg = message_handler.get_answer(msg,
-    user_data["joke_id"],
-    user_data["mode"], 
-    user_data["state"])
+    if("ผวน" in msg):
+        msg = "อยากผวนคำก็จัดมา"
+        user_data["state"] = 3
+    elif("กูชง" in msg):
+        msg = "ชงมาเลย!"
+        user_data["state"] = 1
+    elif("มึงชง" in msg):
+        user_data["state"] = 2
+        msg = message_handler.get_answer(msg,
+        user_data["joke_id"],
+        user_data["mode"], 
+        user_data["state"])
+    else:
+        msg = message_handler.get_answer(msg,
+        user_data["joke_id"],
+        user_data["mode"], 
+        user_data["state"])
     if (msg == None):
         msg = random_out()
         user_data["state"] = 0
