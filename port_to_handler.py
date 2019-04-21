@@ -13,7 +13,7 @@ def get_reply(msg, userid):
     user_data = firebase_api.getUserData(userid)
     if(user_data == None):
         user_data = {
-            "mode": 0,
+            "mode": 1,
             "state": 0,
             "joke_id": ""
         }
