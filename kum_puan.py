@@ -31,6 +31,9 @@ def puan_kum(word):
             del list_of_word[-1]
             list_of_word = list_of_word + [l_spliter_word1, l_spliter_word2]
             last_word = l_spliter_word2
+    
+    if len(list_of_word) == 1:
+        return word
 
     first_alpha, f_start, f_end = find_alpha(first_word)
     # print(find_alpha(first_word))
